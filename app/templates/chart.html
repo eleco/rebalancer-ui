@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>{{ title }}</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+
+<body>
+  <center>
+    <h1>{{ title }}</h1>
+
+    <canvas id="chart"></canvas>
+    <script>
+      var lineChartData = {
+
+        labels: {{ labels | safe }},
+      datasets: [
+        {
+          label: "Cash(GBP)",
+          borderColor: 'rgba(255, 99, 132, 1)',
+          backgroundColor: 'rgba(0,0,0,0)',
+          data: {{ values_gbp }},
+     
+        },
+        {
+          label: "BTC",
+          borderColor: 'rgba(153, 102, 255, 1)',
+          backgroundColor: 'rgba(0,0,0,0)',
+          data: {{ values_btc }}
+        },
+        {
+          label: "Total",
+          borderColor: 'rgba(99, 99, 132, 1)',
+          backgroundColor: 'rgba(0,0,0,0)',
+          data: {{ values_total }}
+        }
+      ]
+      }
+
+      new Chart(document.getElementById("chart"), {
+        type: 'line',
+        data: lineChartData,
+
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          },
+          title: {
+            display: true,
+            text: 'Rebalancing between Bitcoin and Cash/GBP'
+          }
+        }
+      });
+
+
+
+    </script>
+  </center>
+</body>
+
+</html>
